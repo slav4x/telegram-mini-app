@@ -27,7 +27,7 @@ export const LayoutApp = () => {
 				document.documentElement.style.setProperty('--tg-theme-bg-color', '#ffffff');
 				document.documentElement.style.setProperty('--tg-theme-text-color', '#000000');
 
-				tg.setHeaderColor('bg_color');
+				tg.setHeaderColor('#FFFFFF');
 
 				setIsMobile(true);
 			}
