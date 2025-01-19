@@ -1,33 +1,33 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
-const App: React.FC = () => {
-	useEffect(() => {
-		const tg = window.Telegram.WebApp;
+import { LayoutApp } from './layout';
 
-		tg.expand(); // Fullscreen mode
-		tg.ready(); // Init Telegram App
-	}, []);
+const Tasks = React.lazy(() => import('./pages/Tasks/Tasks'));
+const Earn = React.lazy(() => import('./pages/Earn/Earn'));
+const Boost = React.lazy(() => import('./pages/Boost/Boost'));
+const Fame = React.lazy(() => import('./pages/Fame/Fame'));
+const Daily = React.lazy(() => import('./pages/Daily/Daily'));
+const Shop = React.lazy(() => import('./pages/Shop/Shop'));
 
+function App() {
 	return (
-		<div style={{ padding: '16px', textAlign: 'center' }}>
-			<h1>Welcome to Telegram Mini App</h1>
-			<button
-				onClick={() => {
-					window.Telegram.WebApp.close(); // Example of using Telegram API
-				}}
-				style={{
-					padding: '10px 20px',
-					backgroundColor: '#0088cc',
-					color: '#fff',
-					border: 'none',
-					borderRadius: '4px',
-					cursor: 'pointer'
-				}}
-			>
-				Close App
-			</button>
-		</div>
+		<BrowserRouter basename="/telegram-mini-app">
+			<React.Suspense fallback={<>...</>}>
+				<Routes>
+					<Route element={<LayoutApp />}>
+						<Route path="/tasks" element={<Tasks />} />
+						<Route path="/" element={<Earn />} />
+						<Route path="/boost" element={<Boost />} />
+						<Route path="/fame" element={<Fame />} />
+
+						<Route path="/daily" element={<Daily />} />
+						<Route path="/shop" element={<Shop />} />
+					</Route>
+				</Routes>
+			</React.Suspense>
+		</BrowserRouter>
 	);
-};
+}
 
 export default App;

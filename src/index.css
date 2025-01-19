@@ -1,0 +1,75 @@
+@import 'modern-normalize/modern-normalize.css';
+
+:root {
+	--background-color: #ffffff;
+	--text-color: #000000;
+	--safe-area-inset-top: calc(var(--tg-safe-area-inset-top) + 32px);
+	--safe-area-inset-bottom: calc(100vh - var(--tg-viewport-stable-height, 100vh));
+}
+
+@font-face {
+	font-family: 'Chicago';
+	src: url('/fonts/Chicago.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Chicago', sans-serif;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 1.4;
+	overflow: hidden;
+	height: 100vh;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	--tg-bg-color: #ffffff;
+	--tg-text-color: #000000;
+
+	word-wrap: break-word;
+	text-rendering: optimizeSpeed;
+	text-decoration-skip: objects;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-overflow-scrolling: touch;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+}
+
+#root {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.main {
+	height: 100vh;
+	padding: calc(var(--safe-area-inset-top, 0px) + 16px) 16px 16px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 16px;
+	max-width: 576px;
+	margin: 0 auto;
+}
+.main.mobile {
+	padding-bottom: var(--safe-area-inset-bottom);
+}
+
+.content {
+	width: 100%;
+	flex: 1;
+}
