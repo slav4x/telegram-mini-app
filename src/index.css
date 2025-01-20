@@ -19,6 +19,14 @@
 	padding: 0;
 }
 
+html {
+	--tg-color-scheme: light;
+	--tg-theme-bg-color: var(--background-color);
+	--tg-theme-text-color: var(--text-color);
+	--tg-bg-color: var(--background-color);
+	--tg-text-color: var(--text-color);
+}
+
 body {
 	font-family: 'Chicago', sans-serif;
 	font-weight: normal;
@@ -28,8 +36,6 @@ body {
 	height: 100vh;
 	background-color: var(--background-color);
 	color: var(--text-color);
-	--tg-bg-color: #ffffff;
-	--tg-text-color: #000000;
 
 	word-wrap: break-word;
 	text-rendering: optimizeSpeed;
