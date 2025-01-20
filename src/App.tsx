@@ -12,7 +12,7 @@ const Shop = React.lazy(() => import('./pages/Shop/Shop'));
 
 function App() {
 	return (
-		<BrowserRouter basename="/telegram-mini-app">
+		<BrowserRouter>
 			<React.Suspense fallback={<>...</>}>
 				<Routes>
 					<Route element={<LayoutApp />}>
