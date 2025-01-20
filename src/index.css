@@ -20,11 +20,11 @@
 }
 
 html {
-	--tg-color-scheme: light;
-	--tg-theme-bg-color: var(--background-color);
-	--tg-theme-text-color: var(--text-color);
-	--tg-bg-color: var(--background-color);
-	--tg-text-color: var(--text-color);
+	--tg-color-scheme: light !important;
+	--tg-theme-bg-color: var(--background-color) !important;
+	--tg-theme-text-color: var(--text-color) !important;
+	--tg-bg-color: var(--background-color) !important;
+	--tg-text-color: var(--text-color) !important;
 }
 
 body {
