@@ -3,6 +3,8 @@
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 16px;
+	position: relative;
+	z-index: 10;
 }
 
 .header-balance {
@@ -37,6 +39,7 @@
 	color: #000;
 	text-decoration: none;
 	box-shadow: 4px 4px 0px #000000;
+	background: #fff;
 }
 
 .header-nav .shop a {
@@ -46,11 +49,11 @@
 }
 
 .daily-active {
-	background: #000;
+	background: #000 !important;
 	color: #fff !important;
 }
 
 .shop-active {
-	background: #a263f6;
+	background: #a263f6 !important;
 	color: #fff !important;
 }
