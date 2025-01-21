@@ -13,8 +13,10 @@ export const useTelegramSetup = () => {
 
 		tg.ready();
 
+		console.log(tg.requestFullscreen);
+
 		try {
-			if (platform !== 'tdesktop' && platform !== 'macos' && tg.requestFullscreen !== undefined) {
+			if (platform !== 'tdesktop' && platform !== 'macos' && platform !== 'unknown') {
 				setIsMobile(true);
 			}
 		} catch (e) {
