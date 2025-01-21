@@ -16,9 +16,9 @@ export const LayoutApp = () => {
 		);
 	}
 
-	// if (error) {
-	// 	return <div className={isMobile ? 'main mobile' : 'main'}>Error: {error}</div>;
-	// }
+	if (error) {
+		return <div className={isMobile ? 'main mobile' : 'main'}>Error: {error}</div>;
+	}
 
 	return (
 		<div className={isMobile ? 'main mobile' : 'main'}>
