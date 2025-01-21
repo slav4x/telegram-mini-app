@@ -19,7 +19,7 @@ function App() {
 
 		if (tg.initData) {
 			axios
-				.post(`${process.env.API_URL}/api/save-user`, { initData: tg.initData })
+				.post('https://slav4x-telegram-mini-app-server-298e.twc1.net/api/save-user', { initData: tg.initData })
 				.then((response) => {
 					console.log('User saved:', response.data);
 				})

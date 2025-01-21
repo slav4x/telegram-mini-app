@@ -31,7 +31,7 @@ export default function Earn() {
 
 		try {
 			// Отправляем запрос на сервер
-			const response = await axios.post(`${import.meta.env.API_URL}/api/update-balance`, {
+			const response = await axios.post('https://slav4x-telegram-mini-app-server-298e.twc1.net/api/update-balance', {
 				telegramId: userId,
 				amount
 			});
