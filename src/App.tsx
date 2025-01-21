@@ -15,6 +15,7 @@ const Shop = React.lazy(() => import('./pages/Shop/Shop'));
 function App() {
 	useEffect(() => {
 		const tg = window.Telegram.WebApp;
+		console.log(tg.initData);
 
 		if (tg.initData) {
 			axios
