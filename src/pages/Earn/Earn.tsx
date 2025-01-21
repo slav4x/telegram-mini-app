@@ -1,9 +1,52 @@
-import { useEffect, useRef } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useEffect, useRef, useState } from 'react';
+
+import { useUser } from '@/context/user.context';
 
 import styles from './Earn.module.css';
 
 export default function Earn() {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const [userId, setUserId] = useState<number | null>(null);
+	const { balance, setBalance } = useUser();
+
+	useEffect(() => {
+		// Инициализация Telegram WebApp и получение id пользователя
+		const tg = window.Telegram.WebApp;
+
+		// Проверяем, есть ли initDataUnsafe
+		if (tg.initDataUnsafe?.user?.id) {
+			setUserId(tg.initDataUnsafe.user.id);
+		} else {
+			console.error('Failed to get user ID from Telegram WebApp.');
+		}
+	}, []);
+
+	const updateUserBalance = async (amount: number) => {
+		if (!userId) {
+			console.error('User ID is not available.');
+			return;
+		}
+
+		try {
+			// Отправляем запрос на сервер
+			const response = await axios.post(`${import.meta.env.API_URL}/api/update-balance`, {
+				telegramId: userId,
+				amount
+			});
+			setBalance(response.data.user.balance);
+
+			console.log('Balance updated:', response.data);
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				console.error('Axios error:', error.response?.data || error.message);
+			} else if (error instanceof Error) {
+				console.error('General error:', error.message);
+			} else {
+				console.error('Unknown error:', error);
+			}
+		}
+	};
 
 	useEffect(() => {
 		const updateCanvasSize = () => {
@@ -125,6 +168,15 @@ export default function Earn() {
 				/>
 			</div>
 			Earn
+			<br />
+			{userId ? (
+				<div>
+					<p>Telegram ID: {userId}</p>
+					<button onClick={() => updateUserBalance(10)}>+10 coin</button>
+				</div>
+			) : (
+				<p>Не удалось получить данные пользователя</p>
+			)}
 		</>
 	);
 }

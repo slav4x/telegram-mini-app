@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
+import { UserProvider } from './context/user.context';
 import { LayoutApp } from './layout';
 
 const Tasks = React.lazy(() => import('./pages/Tasks/Tasks'));
@@ -30,21 +31,23 @@ function App() {
 	}, []);
 
 	return (
-		<BrowserRouter>
-			<React.Suspense fallback={<>...</>}>
-				<Routes>
-					<Route element={<LayoutApp />}>
-						<Route path="/tasks" element={<Tasks />} />
-						<Route path="/" element={<Earn />} />
-						<Route path="/boost" element={<Boost />} />
-						<Route path="/fame" element={<Fame />} />
+		<UserProvider>
+			<BrowserRouter>
+				<React.Suspense fallback={<>...</>}>
+					<Routes>
+						<Route element={<LayoutApp />}>
+							<Route path="/tasks" element={<Tasks />} />
+							<Route path="/" element={<Earn />} />
+							<Route path="/boost" element={<Boost />} />
+							<Route path="/fame" element={<Fame />} />
 
-						<Route path="/daily" element={<Daily />} />
-						<Route path="/shop" element={<Shop />} />
-					</Route>
-				</Routes>
-			</React.Suspense>
-		</BrowserRouter>
+							<Route path="/daily" element={<Daily />} />
+							<Route path="/shop" element={<Shop />} />
+						</Route>
+					</Routes>
+				</React.Suspense>
+			</BrowserRouter>
+		</UserProvider>
 	);
 }
 
