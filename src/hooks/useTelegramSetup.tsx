@@ -10,7 +10,7 @@ export const useTelegramSetup = () => {
 		TelegramService.disableVerticalSwipes();
 
 		const platform = TelegramService.getPlatform();
-		if (platform !== 'tdesktop' && platform !== 'macos' && platform !== 'unknown') {
+		if (platform !== 'tdesktop' && platform !== 'macos' && platform !== 'unknown' && platform !== 'web') {
 			TelegramService.requestFullscreen();
 			setIsMobile(true);
 		}
