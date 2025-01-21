@@ -8,6 +8,7 @@ import styles from './Earn.module.css';
 export default function Earn() {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const [userId, setUserId] = useState<number | null>(null);
+
 	const { balance, setBalance } = useUser();
 
 	useEffect(() => {
@@ -35,6 +36,8 @@ export default function Earn() {
 				amount
 			});
 			setBalance(response.data.user.balance);
+
+			console.log(balance);
 
 			console.log('Balance updated:', response.data);
 		} catch (error) {
