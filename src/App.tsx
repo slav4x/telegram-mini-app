@@ -12,6 +12,10 @@ const Fame = React.lazy(() => import('./pages/Fame/Fame'));
 const Daily = React.lazy(() => import('./pages/Daily/Daily'));
 const Shop = React.lazy(() => import('./pages/Shop/Shop'));
 
+function ErrorBoundary({ children }: { children: React.ReactNode }) {
+	return <React.Suspense fallback={<div>Loading...</div>}>{children}</React.Suspense>;
+}
+
 function App() {
 	useEffect(() => {
 		const tg = window.Telegram.WebApp;
@@ -34,7 +38,7 @@ function App() {
 	return (
 		<UserProvider>
 			<BrowserRouter>
-				<React.Suspense fallback={<>...</>}>
+				<ErrorBoundary>
 					<Routes>
 						<Route element={<LayoutApp />}>
 							<Route path="/tasks" element={<Tasks />} />
@@ -46,7 +50,7 @@ function App() {
 							<Route path="/shop" element={<Shop />} />
 						</Route>
 					</Routes>
-				</React.Suspense>
+				</ErrorBoundary>
 			</BrowserRouter>
 		</UserProvider>
 	);
