@@ -5,15 +5,16 @@ export const useTelegramSetup = () => {
 
 	useEffect(() => {
 		const tg = window.Telegram.WebApp;
-		const platform = tg.platform;
 
 		tg.ready();
 
 		try {
+			tg.expand();
 			tg.disableVerticalSwipes();
 
+			const platform = tg.platform;
+
 			if (platform !== 'tdesktop' && platform !== 'macos' && tg.requestFullscreen !== undefined) {
-				tg.expand();
 				tg.requestFullscreen();
 				tg.setHeaderColor('#FFFFFF');
 
