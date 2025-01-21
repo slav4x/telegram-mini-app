@@ -1,26 +1,18 @@
 import { useEffect, useState } from 'react';
-
-import { useTelegramFullscreen } from './useTelegramFullscreen';
+import { TelegramService } from '@/services/telegram';
 
 export const useTelegramSetup = () => {
 	const [isMobile, setIsMobile] = useState(false);
 
-	useTelegramFullscreen();
-
 	useEffect(() => {
-		const tg = window.Telegram.WebApp;
-		const platform = tg.platform;
+		TelegramService.init();
+		TelegramService.expand();
+		TelegramService.disableVerticalSwipes();
 
-		tg.ready();
-
-		console.log(tg.requestFullscreen);
-
-		try {
-			if (platform !== 'tdesktop' && platform !== 'macos' && platform !== 'unknown') {
-				setIsMobile(true);
-			}
-		} catch (e) {
-			console.error(e);
+		const platform = TelegramService.getPlatform();
+		if (platform !== 'tdesktop' && platform !== 'macos' && platform !== 'unknown') {
+			TelegramService.requestFullscreen();
+			setIsMobile(true);
 		}
 	}, []);
 

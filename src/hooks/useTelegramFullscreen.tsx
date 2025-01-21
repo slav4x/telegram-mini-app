@@ -1,23 +1,16 @@
 import { useEffect } from 'react';
+import { TelegramService } from '@/services/telegram';
 
 export const useTelegramFullscreen = () => {
 	useEffect(() => {
-		const tg = window.Telegram.WebApp;
+		TelegramService.init();
+		TelegramService.expand();
+		TelegramService.disableVerticalSwipes();
 
-		tg.ready();
-
-		try {
-			tg.expand();
-			tg.disableVerticalSwipes();
-
-			const platform = tg.platform;
-
-			if (platform !== 'tdesktop' && platform !== 'macos' && tg.requestFullscreen !== undefined) {
-				tg.requestFullscreen();
-				tg.setHeaderColor('#FFFFFF');
-			}
-		} catch (e) {
-			console.error('Error enabling fullscreen mode:', e);
+		const platform = TelegramService.getPlatform();
+		if (platform !== 'tdesktop' && platform !== 'macos' && platform !== 'unknown') {
+			TelegramService.requestFullscreen();
+			TelegramService.setHeaderColor('#FFFFFF');
 		}
 	}, []);
 };
