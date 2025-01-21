@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
 import { LayoutApp } from './layout';
@@ -11,6 +12,23 @@ const Daily = React.lazy(() => import('./pages/Daily/Daily'));
 const Shop = React.lazy(() => import('./pages/Shop/Shop'));
 
 function App() {
+	useEffect(() => {
+		const tg = window.Telegram.WebApp;
+
+		if (tg.initData) {
+			axios
+				.post(`${import.meta.env.API_URL}/api/save-user`, { initData: tg.initData })
+				.then((response) => {
+					console.log('User saved:', response.data);
+				})
+				.catch((error) => {
+					console.error('Error saving user:', error);
+				});
+		} else {
+			console.error('Telegram initData not available');
+		}
+	}, []);
+
 	return (
 		<BrowserRouter>
 			<React.Suspense fallback={<>...</>}>
