@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 
 import { UserProvider } from './context/user.context';
 import { LayoutApp } from './layout';
+import { TelegramService } from './services/telegram';
 
 const Tasks = React.lazy(() => import('./pages/Tasks/Tasks'));
 const Earn = React.lazy(() => import('./pages/Earn/Earn'));
@@ -18,7 +19,7 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
 
 function App() {
 	useEffect(() => {
-		const tg = window.Telegram.WebApp;
+		const tg = TelegramService.getWebApp();
 		console.log(tg.initData);
 
 		if (tg.initData) {

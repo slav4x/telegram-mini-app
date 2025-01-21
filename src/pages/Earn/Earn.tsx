@@ -4,6 +4,7 @@ import { useUser } from '@/context/user.context';
 import { useCanvasAnimation } from '@/hooks/useCanvasAnimation';
 
 import styles from './Earn.module.css';
+import { TelegramService } from '@/services/telegram';
 
 export default function Earn() {
 	const canvasRef = useCanvasAnimation();
@@ -12,7 +13,7 @@ export default function Earn() {
 	const { updateBalance } = useUser();
 
 	useEffect(() => {
-		const tg = window.Telegram.WebApp;
+		const tg = TelegramService.getWebApp();
 
 		if (tg.initDataUnsafe?.user?.id) {
 			setUserId(tg.initDataUnsafe.user.id);

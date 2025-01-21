@@ -1,3 +1,4 @@
+import { TelegramService } from '@/services/telegram';
 import axios from 'axios';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
@@ -28,7 +29,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const tg = window.Telegram.WebApp;
+				const tg = TelegramService.getWebApp();
 				const response = await axios.get<User>( // Указываем ожидаемый тип ответа
 					`${import.meta.env.VITE_API_URL}/api/get-user?telegramId=${tg.initDataUnsafe.user.id}`
 				);
