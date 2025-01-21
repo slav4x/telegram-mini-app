@@ -40,6 +40,7 @@
 	text-decoration: none;
 	box-shadow: 4px 4px 0px #000000;
 	background: #fff;
+	height: 40px;
 }
 
 .header-nav .shop a {
@@ -48,7 +49,8 @@
 	box-shadow: 4px 4px 0px #a263f6;
 }
 
-.daily-active {
+.daily-active,
+.profile-active {
 	background: #000 !important;
 	color: #fff !important;
 }

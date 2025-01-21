@@ -12,6 +12,7 @@ const Boost = React.lazy(() => import('./pages/Boost/Boost'));
 const Fame = React.lazy(() => import('./pages/Fame/Fame'));
 const Daily = React.lazy(() => import('./pages/Daily/Daily'));
 const Shop = React.lazy(() => import('./pages/Shop/Shop'));
+const Profile = React.lazy(() => import('./pages/Profile/Profile'));
 
 function ErrorBoundary({ children }: { children: React.ReactNode }) {
 	return <React.Suspense fallback={<div>Loading...</div>}>{children}</React.Suspense>;
@@ -47,6 +48,7 @@ function App() {
 							<Route path="/boost" element={<Boost />} />
 							<Route path="/fame" element={<Fame />} />
 
+							<Route path="/profile" element={<Profile />} />
 							<Route path="/daily" element={<Daily />} />
 							<Route path="/shop" element={<Shop />} />
 						</Route>
