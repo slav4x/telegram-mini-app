@@ -49,6 +49,10 @@ export default function Fame() {
 		fetchLeaderboard();
 	}, []);
 
+	const formatPosition = (position: number): string => {
+		return position.toString().padStart(3, '0'); // Преобразование в формат "001", "034"
+	};
+
 	return (
 		<div className={styles['fame-layout']}>
 			<div className={styles['fame-head']}>
@@ -92,7 +96,7 @@ export default function Fame() {
 				{currentUser && (
 					<div className={styles['leaderboard-me']}>
 						<div className={styles['leaderboard-item']}>
-							<div className={styles['leaderboard-position']}>#{currentUser.position}</div>
+							<div className={styles['leaderboard-position']}>#{formatPosition(currentUser.position)}</div>
 							<div className={styles['leaderboard-name']}>You</div>
 							<div className={styles['leaderboard-score']}>{currentUser.balance}</div>
 						</div>
