@@ -57,7 +57,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 		setUser({ ...user, balance: previousBalance + amount });
 
 		try {
-			const response = await axios.post<{ user: User }>(`${process.env.API_URL}/api/update-balance`, {
+			const response = await axios.post<{ user: User }>(`${import.meta.env.VITE_API_URL}/api/update-balance`, {
 				telegramId: user.telegramId,
 				amount
 			});
