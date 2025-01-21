@@ -52,21 +52,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 			throw new Error('User is not loaded');
 		}
 
+		const previousBalance = user.balance;
+		setUser({ ...user, balance: previousBalance + amount });
+
 		try {
-			const response = await axios.post<{ user: User }>( // Указываем ожидаемый тип ответа
-				`${import.meta.env.VITE_API_URL}/api/update-balance`,
-				{
-					telegramId: user.telegramId,
-					amount
-				}
-			);
-			setUser(response.data.user); // Обновляем данные пользователя
-		} catch (err: unknown) {
-			const errorMessage = axios.isAxiosError(err)
-				? err.response?.data?.message || 'Failed to update balance'
-				: 'Unknown error occurred';
-			console.error('Error updating balance:', errorMessage);
-			throw new Error(errorMessage);
+			const response = await axios.post<{ user: User }>(`${process.env.API_URL}/api/update-balance`, {
+				telegramId: user.telegramId,
+				amount
+			});
+			setUser(response.data.user);
+		} catch (err) {
+			setUser({ ...user, balance: previousBalance });
+			console.error('Error updating balance:', err);
 		}
 	};
 
