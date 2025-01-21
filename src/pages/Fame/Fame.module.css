@@ -106,6 +106,9 @@
 	border-bottom: 2px solid #000;
 	width: 100%;
 }
+.leaderboard-top > div {
+	background: #fff !important;
+}
 .leaderboard-item {
 	display: flex;
 	flex-wrap: wrap;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Fame.module.css';
+import { TelegramService } from '@/services/telegram';
 
 interface LeaderboardItem {
 	id: string;
@@ -27,8 +28,13 @@ export default function Fame() {
 
 	useEffect(() => {
 		const fetchLeaderboard = async () => {
+			const tg = TelegramService.getWebApp();
+			const telegramId = tg.initDataUnsafe?.user?.id;
+
 			try {
-				const response = await axios.get<LeaderboardResponse>(`${import.meta.env.VITE_API_URL}/api/get-leaderboard`);
+				const response = await axios.get<LeaderboardResponse>(`${import.meta.env.VITE_API_URL}/api/get-leaderboard`, {
+					params: { telegramId } // Передача telegramId в запросе
+				});
 				setLeaderboard(response.data.leaderboard);
 				setCurrentUser(response.data.currentUserPosition);
 				setTotalUsers(response.data.totalUsers);
