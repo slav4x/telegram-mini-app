@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 			try {
 				const tg = window.Telegram.WebApp;
 				const response = await axios.get<User>( // Указываем ожидаемый тип ответа
-					`https://slav4x-telegram-mini-app-server-298e.twc1.net/api/get-user?telegramId=${tg.initDataUnsafe.user.id}`
+					`${process.env.API_URL}/api/get-user?telegramId=${tg.initDataUnsafe.user.id}`
 				);
 				setUser(response.data); // Устанавливаем пользователя
 			} catch (err: unknown) {
@@ -54,7 +54,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
 		try {
 			const response = await axios.post<{ user: User }>( // Указываем ожидаемый тип ответа
-				'https://slav4x-telegram-mini-app-server-298e.twc1.net/api/update-balance',
+				`${process.env.API_URL}/api/update-balance`,
 				{
 					telegramId: user.telegramId,
 					amount
