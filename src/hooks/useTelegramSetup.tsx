@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 
+import { useTelegramFullscreen } from './useTelegramFullscreen';
+
 export const useTelegramSetup = () => {
 	const [isMobile, setIsMobile] = useState(false);
 
+	useTelegramFullscreen();
+
 	useEffect(() => {
 		const tg = window.Telegram.WebApp;
+		const platform = tg.platform;
 
 		tg.ready();
 
 		try {
-			tg.expand();
-			tg.disableVerticalSwipes();
-
-			const platform = tg.platform;
-
 			if (platform !== 'tdesktop' && platform !== 'macos' && tg.requestFullscreen !== undefined) {
-				tg.requestFullscreen();
-				tg.setHeaderColor('#FFFFFF');
-
 				setIsMobile(true);
 			}
 		} catch (e) {
