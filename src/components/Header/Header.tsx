@@ -5,11 +5,11 @@ import { useUser } from '@/context/user.context';
 import styles from './Header.module.css';
 
 export const Header = () => {
-	const { balance } = useUser();
+	const { user } = useUser();
 
 	return (
 		<div className={styles['header']}>
-			<div className={styles['header-balance']}>{balance}</div>
+			<div className={styles['header-balance']}>{user?.balance || 0}</div>
 			<ul className={styles['header-nav']}>
 				<li>
 					<NavLink className={({ isActive }) => (isActive ? styles['daily-active'] : '')} to="/daily">

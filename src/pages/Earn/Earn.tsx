@@ -1,4 +1,3 @@
-import axios, { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 
 import { useUser } from '@/context/user.context';
@@ -9,7 +8,7 @@ export default function Earn() {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const [userId, setUserId] = useState<number | null>(null);
 
-	const { balance, setBalance } = useUser();
+	const { updateBalance } = useUser();
 
 	useEffect(() => {
 		// Инициализация Telegram WebApp и получение id пользователя
@@ -24,30 +23,11 @@ export default function Earn() {
 	}, []);
 
 	const updateUserBalance = async (amount: number) => {
-		if (!userId) {
-			console.error('User ID is not available.');
-			return;
-		}
-
 		try {
-			// Отправляем запрос на сервер
-			const response = await axios.post('https://slav4x-telegram-mini-app-server-298e.twc1.net/api/update-balance', {
-				telegramId: String(userId),
-				amount
-			});
-			setBalance(response.data.user.balance);
-
-			console.log(balance);
-
-			console.log('Balance updated:', response.data);
-		} catch (error) {
-			if (error instanceof AxiosError) {
-				console.error('Axios error:', error.response?.data || error.message);
-			} else if (error instanceof Error) {
-				console.error('General error:', error.message);
-			} else {
-				console.error('Unknown error:', error);
-			}
+			await updateBalance(amount); // Добавляем 100 к балансу
+			console.log('Balance updated');
+		} catch (err) {
+			console.error('Error updating balance:', err);
 		}
 	};
 
