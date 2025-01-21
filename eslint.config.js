@@ -17,12 +17,14 @@ export default tseslint.config(
 		plugins: {
 			'react-hooks': reactHooks,
 			'react-refresh': reactRefresh,
-			'simple-import-sort': simpleImportSort
+			'simple-import-sort': simpleImportSort,
+			prettier: 'eslint-plugin-prettier'
 		},
 		rules: {
 			...reactHooks.configs.recommended.rules,
 			'simple-import-sort/imports': 'error',
 			'simple-import-sort/exports': 'error',
+			'prettier/prettier': 'error',
 			'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 			semi: ['error', 'always', { omitLastInOneLineBlock: false }],
 			'comma-dangle': ['error', 'never'],
