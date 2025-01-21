@@ -19,7 +19,7 @@ function App() {
 
 		if (tg.initData) {
 			axios
-				.post(`${import.meta.env.API_URL}/api/save-user`, { initData: tg.initData })
+				.post(`${process.env.API_URL}/api/save-user`, { initData: tg.initData })
 				.then((response) => {
 					console.log('User saved:', response.data);
 				})
